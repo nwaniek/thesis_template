@@ -1,8 +1,16 @@
 \newgeometry{hmargin={3.5cm, 3.5cm}, vmargin={4.5cm,3cm}}
 \begin{titlepage}
+
+% TODO
+% In this version, the faculty and institute names are included in the
+% image. In order to change it there, either edit the
+% logowithfaculty.pdf or the .svg and export to pdf
     \begin{center}
         \includegraphics[width=\textwidth]{frontmatter/img/logowithfaculty}
     \end{center}
+% TODO:
+% another way would be to remove the names from the logo and add them
+% here, but that might look worse than using the image variant
 %    \begin{flushright}
 %        \textbf{\faculty} \\
 %        \institute
@@ -12,7 +20,7 @@
     \begin{center}
     \Huge{\bfseries\thesistitle} \\
     \vspace{0.25cm}
-    \Large{Diploma Thesis}
+    \Large{\thtype}
 
     \vspace{2.5cm}
     \Large{submitted by} \\
@@ -24,11 +32,15 @@
     \Large{\supervisorA, \supervisorAuni} \\
     \Large{\supervisorB, \supervisorBuni} \\
 
+% TODO: 
+% if you had an advisor, enable the following three lines
 %    \vspace{1.25cm}
 %    \Large{\textbf{Advisor}} \\
 %    \Large{\tutor} \\
 
     \vspace{2cm}
+% TODO
+% note the date formatting ("th" instead of "st" or whatever)
     \Large{\thday{}th \thmonth{ }\thyear}
 
     \end{center}

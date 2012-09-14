@@ -4,11 +4,13 @@ BIB = thesis.bib
 
 # needs 3 tex calls after bibtex so that backreferences work
 all:
+	$(TEX) -v | head -n 1 > frontmatter/texversion
 	$(TEX) $(SRC)
 	bibtex thesis
 	$(TEX) $(SRC)
 	$(TEX) $(SRC)
 	$(TEX) $(SRC)
+	@rm frontmatter/texversion
 
 clean:
 	rm -f *.aux
