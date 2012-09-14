@@ -1,0 +1,155 @@
+\definecolor{shadecolor}{rgb}{1.0,0.7,0.5}
+
+\newenvironment{todoenv}%
+    {\begin{shaded}}%
+    {\end{shaded}}
+
+\newcommand{\todo}[1]{%
+    \marginpar{%
+            \vspace*{-1.5\baselineskip}%
+            \begin{todoenv}%
+            \textbf{TODO}:\\%
+            #1%
+            \end{todoenv}%
+
+    }}%
+
+\newcommand{\texttodo}[1]{%
+    \begin{todoenv}%
+        #1%
+    \end{todoenv}%
+    }%
+
+\makeatletter
+    \def\relativepath{\input@path}
+\makeatother
+
+
+
+% make things go over the whole page
+\newlength{\wholemargin}\setlength{\wholemargin}{\marginparwidth}
+\addtolength{\wholemargin}{\marginparpush}
+\newlength{\wholewidth}\setlength{\wholewidth}{\textwidth}
+\addtolength{\wholewidth}{\wholemargin}
+
+
+\newlength{\wholefitwidth}\setlength{\wholefitwidth}{\marginparwidth}
+\addtolength{\wholefitwidth}{\textwidth}
+
+% Whole environment
+\newenvironment{whole}{%
+    \centering
+    \strictpagechecktrue
+    \begin{adjustwidth*}{0em}{-\wholemargin}
+    \strictpagechecktrue
+    \checkoddpage
+    \ifoddpage%
+        \raggedright
+    \else%
+        \raggedleft
+    \fi%
+}{%
+    \end{adjustwidth*}
+}
+
+
+% figref + subfigref
+\newcommand{\figref}[1]{\ref{fig:#1}}
+\newcommand{\subfigref}[2]{\ref{fig:#1}\subref{fig:#1_#2}}
+
+
+% import an image
+\newcommand{\img}[1]{\subimport{img/}{#1}}
+
+\newlength\figurewidth
+\newlength\figureheight
+
+% import tikz script
+\newcommand{\tikzimp}[3]{{%
+    \setlength\figurewidth{#2}
+    \setlength\figureheight{#3}
+    \subimport{tikz/}{#1.tikz}}}
+
+% place a simple image to the marginpar
+\newcommand{\mparimg}[1]{%
+    \marginpar{%
+    \def\svgwidth{\marginparwidth}
+    \img{#1}
+    }}
+
+% place a figure with caption to the marginpar
+\newcommand{\mparfig}[2]{%
+    \marginpar{%
+    \def\svgwidth{\marginparwidth}
+    \img{#1}
+    \captionof{figure}{#2}
+    }}
+
+
+% The same, but for TIKZ figures
+\newcommand{\mpartikz}[1]{%
+    \marginpar{
+        \centering
+        \subimport{tikz/}{#1}
+    }}
+
+\newcommand{\mpartikzfig}[2]{%
+    \marginpar{
+        \centering
+        \subimport{tikz/}{#1}
+        \captionof{figure}{#2}
+    }}
+
+
+\newcommand{\degrees}{{}^{\circ}}
+\newcommand{\comment}[1]{}
+
+% lazy bitch is lazy
+\newcommand{\C}{\texttt{C}}
+\newcommand{\ansic}{\texttt{ANSI C99}}
+\newcommand{\Cpp}{\texttt{C++}}
+\newcommand{\exr}{\texttt{OpenEXR}}
+\newcommand{\openexr}{\texttt{OpenEXR}}
+\newcommand{\exrtools}{\texttt{exrtools}}
+\newcommand{\matexr}{\texttt{matexr}}
+\newcommand{\exrflow}{\texttt{exrflow}}
+\newcommand{\camlocpos}{\texttt{camlocpos}}
+\newcommand{\censure}{\texttt{censure}}
+\newcommand{\libcensure}{\texttt{libcensure}}
+\newcommand{\blender}{\texttt{blender}}
+
+\newcommand{\Ups}{\Upsilon}
+
+\newcommand{\fundmat}{\mathbf{F}}
+\newcommand{\essmat}{\mathbf{E}}
+\newcommand{\calmat}{\mathbf{K}}
+
+
+\newcommand{\expm}[1]{{}^{M}\exp{\left(#1\right)}}
+\newcommand{\logm}[1]{{}^{M}\log{\left(#1\right)}}
+
+
+% command to rotate the text sideways. used, for example, in tables. verttext = vertical text
+%\newcommand{\verttext}[1]{\begin{sideways}\parbox{15mm}{#1}\end{sideways}}
+\newcommand{\verttext}[1]{\begin{sideways}#1\end{sideways}}
+
+\newcommand{\unit}[1]{\ensuremath{\, \mathrm{#1}}}
+
+% specialized commands 
+\newcommand{\mparoverview}[1]{
+    \marginnote{
+        \centering
+        \subimport{tikz/mparoverview/}{#1.pgf}
+    }}
+
+
+% punctuation mark in equations. raise them vertically by increasing the
+% raisebox value. usage: \eqpt{.} or \eqpt{,}, for example
+\newcommand{\eqpt}[1]{\quad\raisebox{0pt}{#1}}
+
+
+% tikz stuff
+\newcommand{\polygon}[2]{%
+  let \n{len} = {2*#2*tan(360/(2*#1))} in
+ ++(0,-#2) ++(\n{len}/2,0) \foreach \x in {1,...,#1} { -- ++(\x*360/#1:\n{len})}}
+

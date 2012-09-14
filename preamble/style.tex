@@ -1,0 +1,181 @@
+%%
+%% STYLE
+%%
+\definecolor{halfgray}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
+\definecolor{webgreen}{rgb}{0,.5,0}
+\definecolor{webbrown}{rgb}{.6,0,0}
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Microtype setup: don't use protrusion on mathematical formulas
+\DeclareMicrotypeSet{microtypenomath}
+    { encoding = {OT1,T1,T2A,LY1,OT4,QX,T5},
+      family   = {rm*,sf*},
+      series   = {md*},
+      size     = {normalsize,footnotesize,small,large}
+    }
+\UseMicrotypeSet[protrusion]{microtypenomath}
+\microtypesetup{expansion=false, protrusion=true}%
+% disable protrusion in verbatim environments
+\makeatletter
+\g@addto@macro\@verbatim{\microtypesetup{activate=false}}
+\makeatother
+
+% commands to easily create headings
+\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}
+\DeclareRobustCommand{\spacedmidcaps}[1]{\textls[110]{\MakeTextUppercase{#1}}}
+\DeclareRobustCommand{\spacedsmallcaps}[1]{\textls[80]{\MakeTextUppercase{#1}}}
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
+
+
+%
+% headlines
+%
+\clearscrheadings
+    \setheadsepline{.2pt}
+    \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+    \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}} 
+    \lehead{\mbox{\llap{\small\textbf{\thepage}\kern2em}\headmark\hfil}}
+    \rohead{\mbox{\hfil{\headmark}\rlap{\small\kern2em\textbf{\thepage}}}}
+    \renewcommand{\headfont}{\small}
+%    \DeclareRobustCommand{\fixBothHeadlines}[2]{} % <--- ToDo
+    % hack to get the content headlines right (thanks, Lorenzo!)
+		\def\toc@heading{%
+	 		\ifthenelse{\boolean{@nochapters}}%
+	 		{\section*{\contentsname}}%nochapters
+	 		{\chapter*{\contentsname}}%chapters
+	 		\@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}}
+
+% FONT
+% define the chapter number
+\newfont{\chapterNumber}{eurb10 scaled 7000}
+%\newfont{\chapterNumber}{pplr9d scaled 7000}
+
+%
+% chapter, section, ... font config
+%
+\let\oldmarginpar\marginpar
+    %parts
+    \titleformat{\part}[display]
+        {\normalfont\centering\large}%
+        {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
+        {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\end{quote}]
+    % chapters
+    \titleformat{\chapter}[display]%
+        {\relax}{\mbox{}\oldmarginpar{\vspace*{-.5\baselineskip}\color{halfgray}\chapterNumber\thechapter}}{0pt}%
+        {\huge\raggedright\sffamily\spacedallcaps}[\normalsize\vspace*{2.5\baselineskip}]% 
+    % sections \FloatBarrier
+
+%    \titleformat{\section}
+%        {\relax}{\Large\textsc{\MakeTextLowercase{\thesection}}}{1em}{\Large\sffamily\spacedmidcaps}
+
+
+    \titleformat{\section}
+        {\raggedright}%
+        {\Large\textsc{\MakeTextLowercase{\thesection}}}%
+        {1em}%
+        {\Large\sffamily\spacedmidcaps}%
+        {\relax}
+
+    % subsections
+    \titleformat{\subsection}
+        {\raggedright}%
+        {\large\textsc{\MakeTextLowercase{\thesubsection}}}%
+        {1em}%
+        {\large\spacedsmallcaps}%
+        {\relax}
+
+    % subsubsections
+    \titleformat{\subsubsection}
+        {\relax}{\textsc{\MakeTextLowercase{\thesubsubsection}}}{1em}{\normalsize\spacedlowsmallcaps}
+    % paragraphs
+    \titleformat{\paragraph}[runin]
+        {\normalfont\normalsize}{\theparagraph}{0pt}{\spacedlowsmallcaps}
+    \titleformat{\subparagraph}[runin]
+        {\normalfont\normalsize}{\thesubparagrap}{0pt}{\normalsize\textit}
+    % descriptionlabels
+        \renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}\spacedlowsmallcaps{#1}}   % spacedlowsmallcaps textit textsc                  
+    % spacing
+    \titlespacing*{\chapter}{0pt}{5\baselineskip}{1.2\baselineskip}
+    \titlespacing*{\section}{0pt}{1.75\baselineskip}{1\baselineskip} 
+    \titlespacing*{\subsection}{0pt}{1.5\baselineskip}{.75\baselineskip}
+    \titlespacing*{\paragraph}{0pt}{1\baselineskip}{1\baselineskip}
+
+
+
+\newcommand{\oldsection}
+
+
+% footnotes
+\deffootnote{2em}{0em}{\thefootnotemark\hspace*{.625em}}
+
+% Table of Contents, List of Tables, ...
+\newlength{\newnumberwidth}
+\settowidth{\newnumberwidth}{999}
+\cftsetpnumwidth{\newnumberwidth}
+
+\newlength{\beforebibskip}
+\setlength{\beforebibskip}{0em}
+
+    % chapters
+    \renewcommand{\cftchappresnum}{\scshape}%
+    \renewcommand{\cftchapfont}{\textbf}%
+    \renewcommand{\cftchappagefont}{\normalfont}%
+
+    % sections
+    \renewcommand{\cftsecpresnum}{\scshape\MakeTextLowercase}%
+    \renewcommand{\cftsecfont}{\normalfont}%
+    \renewcommand{\cftsecpagefont}{\normalfont}%
+    % uncomment the following to get the chapter/section numbers on the same
+    % indent. if this is wished, then add the line to subsections and
+    % subsubsections as well!
+    %\renewcommand{\cftsecindent}{0em}%
+
+    % subsections
+    \renewcommand{\cftsubsecpresnum}{\scshape\MakeTextLowercase}%
+    \renewcommand{\cftsubsecfont}{\normalfont}%
+
+    % subsubsection
+    \renewcommand{\cftsubsubsecpresnum}{\scshape\MakeTextLowercase}%
+    \renewcommand{\cftsubsubsecfont}{\normalfont}%
+
+% text area size
+%\areaset[current]{336pt}{750pt}
+%\areaset[current]{420pt}{690pt}
+%\areaset[current]{420pt}{750pt}
+%\areaset[current]{400pt}{720pt}
+%\areaset[current]{386pt}{688pt}
+%\areaset[current]{346pt}{668pt}
+%\areaset[current]{400pt}{690pt}
+
+\areaset[current]{378pt}{688pt}
+
+
+
+% marginpar
+%\setlength{\marginparwidth}{2em}
+%\setlength{\marginparsep}{5em}
+
+% make marginpar less ugly
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]{\raggedright\footnotesize #1}}
+
+
+%
+% DRAFT: print a version information on the bottom line. just 
+% comment the four lines to remove the bottom line
+%
+%\PassOptionsToPackage{draft}{prelim2e}
+%\usepackage{prelim2e}
+%\renewcommand{\PrelimWords}{\relax}
+%\renewcommand{\PrelimText}{\footnotesize[\,\today\ at \thistime\ -- \texttt{\thesistitle}]}
+
+
+%
+% Back References
+%
+% other possible style: \dotfill, or \\ cited on \dotfill #1
+%\renewcommand{\backref}[1]{\vspace*{-.75\baselineskip}\begin{flushright}#1\end{flushright}}
+\renewcommand{\backref}[1]{ (cited on p. #1)} 

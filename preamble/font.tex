@@ -1,0 +1,36 @@
+% font settings
+%\usepackage[adobe-utopia]{mathdesign}
+%\usepackage{charter}
+\usepackage{lmodern}
+%\usepackage{utopia}
+%\usepackage{MinionPro}
+
+
+% select the Inconsolata font for typewriten text and make it a little bit
+% smaller for texttt (as Inconsolata seems to be a little bit larger than the
+% default typewriter font
+\renewcommand{\ttdefault}{fi4}  % inconsola
+\renewcommand{\texttt}[1]{{\small\ttfamily#1}}
+
+% adapt the size change for the URL package as well
+\def\UrlFont{\small\tt}
+
+
+
+% if you want to have blocks with different languages, you can create new
+% commands for each font use it with
+%     \begingroup
+%          \myfont
+%          your text
+%     \endgroup
+% command to create the newfont:
+%    \newcommand*{\myfont}{\small\fontfamily{fi4}\selectfont}
+%
+% or you create a new environment for it:
+%    \newenvironment{myfont}{\fontfamily{fi4}\selectfon}{\par}
+% and use it like any other environment:
+%    \begin{myfont}
+%       your text
+%    \end{myfont}
+%
+%

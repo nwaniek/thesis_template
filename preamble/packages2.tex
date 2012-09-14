@@ -1,0 +1,115 @@
+% include the geometry package only if you really want to change geometry setup
+% like perfectly centering the titlepage (though this is not required if the
+% titlepage won't be the top page but is the first page inside the document
+% (then you have to make sure to regard BCOR values)
+\usepackage{geometry}
+
+% with the url package, URLs can be entered like this: \url{...}, with the
+% hyperref package they will become hyper links (and possibly colored)
+\usepackage{url}
+
+% to have equations always on the same indent, add the 'fleqn' option when
+% loading the amsmath package
+\PassOptionsToPackage{%
+    centertags, %
+    sumlimits, %
+    intlimits, %
+    namelimits}{amsmath}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+% if you want to use the MinionPro font, comment the next line as it is
+% incompatible with amssymb and amsfonts
+\usepackage{amssymb, amsfonts}
+
+% If you want to use lmodern package but have standardized math, include the
+% fixmath package to get ISO31-0:1992 to ISO31-13:1992 compliant math output
+\usepackage{fixmath}
+
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage[pdftex]{graphicx}
+\usepackage{tabularx}
+\usepackage{longtable, lscape}
+
+
+% the following package will inhibit the use of the TIKZ calc library
+%\usepackage[all, warning]{onlyamsmath}
+
+\usepackage{braket}
+\usepackage{cancel}
+\usepackage{empheq}
+\usepackage{exscale}
+\usepackage{icomma}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage[square,numbers]{natbib}
+\usepackage[titles]{tocloft}
+\usepackage[pdftex, hyperfootnotes=false, pdfpagelabels, backref=page]{hyperref}
+%\pdfcompresslevel=9
+%\pdfadjustspacing=1
+\usepackage{epstopdf}
+
+\usepackage{float}    % floating figures, tables, etc.
+\usepackage{rotating} % required for the sideways environment
+\usepackage{dpfloat}
+\usepackage{pbox}
+%\usepackage{fltpage}
+
+%
+% Figure, Table, etc. captions and subfigures. caption package must come after
+% floata and rotating
+%
+\usepackage[normal, labelfont=bf]{caption}
+\usepackage[singlelinecheck=true]{subfig}
+
+%
+% Circumvent problems of marginpar with the marginnote package. Requires the
+% document to be compiled more than just once to place the margins properly.
+%
+\usepackage{marginnote}
+
+
+%
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage{url}
+%\usepackage{verbatim}
+\usepackage[left]{eurosym}
+\usepackage{epigraph}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[automark, komastyle]{scrpage2}
+\usepackage{scrtime}
+\usepackage[bottom, stable, ragged, multiple]{footmisc}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{textcase}
+\usepackage[boxed, lined, commentsnumbered]{algorithm2e}
+\usepackage[toc, page]{appendix}
+\usepackage{framed}
+\usepackage{addlines}
+
+%\usepackage{hyphenat}
+
+
+% tikz/pgf plot and required packages
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{makecell}
+
+% load additional tikz packages
+\usetikzlibrary{decorations, arrows, matrix, trees, calc, shapes, positioning}
+
+% pgf settings
+%\pgfplotsset{compat=newest}
+%\pgfplotsset{plot coordinates/math parser=false}
+
+
+%
+% consecutive footnote numbering
+%
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+%\usepackage{remreset}
+
